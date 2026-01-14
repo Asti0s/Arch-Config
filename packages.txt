@@ -1,0 +1,12 @@
+# SSH & Git
+openssh
+git
+
+# Audio
+pipewire
+pipewire-pulse
+pipewire-alsa
+pipewire-jack
+wireplumber
+gst-plugin-pipewire
+libpulse
