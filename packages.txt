@@ -1,9 +1,14 @@
-# SSH & Git
+# Misc
 openssh
 git
+tree
+zip
+unzip
+rar
 
-# Desktop
+# Desktop apps
 pavucontrol
+kitty
 
 # Audio
 pipewire
@@ -16,3 +21,19 @@ libpulse
 sof-firmware
 alsa-firmware
 alsa-utils
+
+# Intel GPU
+mesa
+lib32-mesa
+vulkan-intel
+lib32-vulkan-intel
+intel-media-driver
+
+# Hyprland
+hyprland
+xdg-desktop-portal-hyprland
+qt5-wayland
+qt6-wayland
+wofi
+waybar
+swaybg

@@ -9,6 +9,10 @@ BUILD_DIR="./install_tmp"
 # --- 1. Initialization ---
 
 ensure_prerequisites() {
+    echo ":: Enabling multilib repository..."
+    # Uncomment the [multilib] section in pacman.conf
+    sudo sed -i "/^#\[multilib\]/,/^#Include = \/etc\/pacman.d\/mirrorlist/ s/^#//" /etc/pacman.conf
+
     echo ":: Ensuring base-devel and git are installed..."
     sudo pacman -Syu --needed --noconfirm base-devel git
 }
@@ -98,12 +102,21 @@ setup_audio() {
     systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service
 }
 
-# setup_configs() {
-#     echo "Setting up configurations..."
-#     mkdir -p "$HOME/.config/hypr"
-#     ln -sf "$SCRIPT_DIR/config/hypr/hyprland.conf" "$HOME/.config/hypr/hyprland.conf"
-#     echo "Configurations linked successfully."
-# }
+setup_configs() {
+    DOTFILES_DIR="$SCRIPT_DIR/dotfiles"
+
+    # Recursively find all files in dotfiles/ and link them to $HOME
+    find "$DOTFILES_DIR" -type f | while read -r src; do
+        rel_path="${src#$DOTFILES_DIR/}"
+        target="$HOME/$rel_path"
+
+        mkdir -p "$(dirname "$target")"
+
+        echo "   linking $rel_path"
+        ln -sf "$src" "$target"
+    done
+    echo ":: Configuration sync complete."
+}
 
 # --- Main Entry Point ---
 
@@ -114,7 +127,7 @@ main() {
     sync_packages
     setup_audio
     cleanup_system
-#     setup_configs
+    setup_configs
     echo ":: System configuration successful."
 }
 
