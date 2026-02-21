@@ -2,6 +2,9 @@
 openssh
 git
 
+# Desktop
+pavucontrol
+
 # Audio
 pipewire
 pipewire-pulse
