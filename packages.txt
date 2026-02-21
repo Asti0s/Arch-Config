@@ -13,3 +13,6 @@ pipewire-jack
 wireplumber
 gst-plugin-pipewire
 libpulse
+sof-firmware
+alsa-firmware
+alsa-utils

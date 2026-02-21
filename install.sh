@@ -93,6 +93,11 @@ cleanup_system() {
 
 # --- 3. Configuration ---
 
+setup_audio() {
+    echo ":: Enabling audio services (Pipewire & Wireplumber)..."
+    systemctl --user enable --now pipewire.service pipewire-pulse.service wireplumber.service
+}
+
 # setup_configs() {
 #     echo "Setting up configurations..."
 #     mkdir -p "$HOME/.config/hypr"
@@ -107,6 +112,7 @@ main() {
     install_paru
     init_foundation
     sync_packages
+    setup_audio
     cleanup_system
 #     setup_configs
     echo ":: System configuration successful."
